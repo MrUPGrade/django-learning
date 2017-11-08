@@ -147,7 +147,7 @@ LOGGING = {
 }
 
 LOGIN_REDIRECT_URL = '/'
-
+LOGIN_URL = '/auth/login'
 # Internationalization
 # https://docs.djangoproject.com/en/1.11/topics/i18n/
 
