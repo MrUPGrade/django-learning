@@ -3,6 +3,7 @@ RM=rm -Rfv
 
 PYTHON=python
 PIP=pip
+MPY=$(PYTHON) mysite/manage.py
 
 clean-pyc:
 	find . -name '*.pyc' -exec rm -fv {} +
@@ -25,3 +26,12 @@ pip-install:
 	$(PIP) install --upgrade setuptools
 	$(PIP) install --upgrade -r requirements.txt
 	$(PIP) install --upgrade -r requirements-dev.txt
+
+dj-migrate:
+	$(MPY) migrate
+
+dj-makemigrations:
+	$(MPY) makemigrations
+
+mys-initusers:
+	$(MPY) initusers

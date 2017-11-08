@@ -119,7 +119,12 @@ DEBUG_TOOLBAR_PANELS = [
 
 LOGGING = {
     'version': 1,
-    'disable_existing_loggers': False,
+    'disable_existing_loggers': True,
+    'formatters': {
+        'default': {
+            'format': '%(asctime)s:%(threadName)s:%(levelname)s:%(name)s:%(message)s'
+        }
+    },
     'handlers': {
         'file': {
             'level': 'DEBUG',
@@ -135,13 +140,13 @@ LOGGING = {
     'loggers': {
         'django': {
             'handlers': ['file', 'console'],
-            'level': 'DEBUG',
+            'level': 'INFO',
             'propagate': True,
         },
     },
 }
 
-LOGIN_REDIRECT_URL='/'
+LOGIN_REDIRECT_URL = '/'
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.11/topics/i18n/

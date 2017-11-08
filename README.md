@@ -1,2 +1,3 @@
-# django-tutorial
-Project to follow with the Django tutorial, and poke around with the ecosystem. 
+# Django Learning
+
+Project for learning Django and its ecosystem.
