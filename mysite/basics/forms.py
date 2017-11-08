@@ -6,7 +6,7 @@ import basics.models as db_models
 class ContactForm(forms.ModelForm):
     class Meta:
         model = db_models.Contact
-        exclude = ('id',)
+        exclude = ('id','user', )
 
 
 class TagsAddForm(forms.ModelForm):

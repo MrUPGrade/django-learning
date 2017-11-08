@@ -15,7 +15,7 @@ class ContactDetailView(DetailView, LoginRequiredMixin):
     model = models.Contact
 
     def get_queryset(self):
-        return models.Contact.objects.all().prefetch_related('tags')
+        return self.model.objects.prefetch_related('tags')
 
 
 class AddContactView(View, LoginRequiredMixin):
@@ -28,12 +28,15 @@ class AddContactView(View, LoginRequiredMixin):
     def post(self, request):
         form = forms.ContactForm(request.POST)
         if form.is_valid():
-            form.save()
+            contanct = form.save(commit=False)
+            contanct.user = request.user
+            contanct.save()
+            form.save_m2m()
             return HttpResponseRedirect(reverse('basics:contact-all'))
 
         return render(request, self.template, {'form': form})
 
 @login_required
 def all_contacts(request):
-    contacts = list(models.Contact.objects.all())
+    contacts = models.Contact.objects.filter(user=request.user)
     return render(request, 'basics/contact/all.html', {'contacts': contacts})
