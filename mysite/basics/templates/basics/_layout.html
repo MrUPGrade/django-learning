@@ -1,0 +1,29 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Title{% endblock %}</title>
+
+    <link rel="stylesheet" type="text/css" href="{% static 'basics/css/bootstrap.css' %}"/>
+</head>
+<body>
+{% include 'basics/_navbar.html' %}
+
+<div class="container">
+    {% block content %}
+        Default content
+    {% endblock %}
+</div>
+
+</body>
+
+<script src="{% static 'basics/js/jquery-3.2.1.js' %}"></script>
+<script src="{% static 'basics/js/bootstrap.js' %}"></script>
+<script src="{% static 'basics/js/vue.js' %}"></script>
+
+{% block js %}
+{% endblock %}
+
+</html>

@@ -1,0 +1,11 @@
+{% extends 'basics/_layout.html' %}
+
+{% block title %}Add contact{% endblock %}
+
+{% block content %}
+    <form class="form-horizontal" action="{% url 'basics:contact-add' %}" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input class="btn btn-default" type="submit" value="Submit"/>
+    </form>
+{% endblock %}

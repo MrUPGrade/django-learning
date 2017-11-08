@@ -1,0 +1,16 @@
+{% extends 'basics/_layout.html' %}
+
+{% block title %}Contact details{% endblock %}
+
+{% block content %}
+    First name: {{ object.first_name }}<br/>
+    Last name: {{ object.last_name }}<br/>
+    Email: {{ object.email }} <br/>
+    Phone: {{ object.phone }} <br/>
+
+    <span>Tags:</span>
+    {% for tag in object.tags.all %}
+        <span class="badge">{{ tag.name }}</span>
+    {% endfor %}
+
+{% endblock %}

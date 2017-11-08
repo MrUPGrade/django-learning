@@ -1,0 +1,17 @@
+{% extends 'basics/_layout.html' %}
+
+{% block title %}All contacts{% endblock %}
+
+{% block content %}
+
+    <h3>All my contacts</h3>
+
+    <ul class="list-unstyled">
+        {% for c in contacts %}
+            <li><a href="{% url 'basics:contact-details' pk=c.id %}"> {{ c.first_name }} {{ c.last_name }}</a></li>
+        {% endfor %}
+    </ul>
+
+    <p><a class="btn btn-default" href="{% url 'basics:contact-add' %}">Add contact</a></p>
+
+{% endblock %}

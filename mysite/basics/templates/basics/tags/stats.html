@@ -1,0 +1,13 @@
+{% extends 'basics/_layout.html' %}
+
+{% block title %}Tags{% endblock %}
+
+{% block content %}
+    <ul class="list-unstyled">
+        {% for tag_stats in tags_counts %}
+            <li>{{ tag_stats.name }}:{{ tag_stats.count }}</li>
+        {% endfor %}
+    </ul>
+
+    <a class="btn btn-default" href="{% url 'basics:tags-add' %}">Add</a>
+{% endblock %}

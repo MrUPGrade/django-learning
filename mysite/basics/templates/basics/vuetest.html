@@ -1,0 +1,23 @@
+{% extends 'basics/_layout.html' %}
+
+{% block content %}
+    {% verbatim js %}
+
+        <div id="app">
+            <p>This is a VueJS App</p>
+            {{ message }}
+        </div>
+
+    {% endverbatim js %}
+{% endblock %}
+
+{% block js %}
+    <script>
+        var app = new Vue({
+            el: '#app',
+            data: {
+                message: 'Hello Vue!'
+            }
+        })
+    </script>
+{% endblock %}

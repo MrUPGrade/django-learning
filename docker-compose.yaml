@@ -1,0 +1,14 @@
+version: '3'
+services:
+
+  db:
+    image: postgres:9.6
+    ports:
+      - "11001:5432"
+    volumes:
+      - ./ops/pg_sql:/docker-entrypoint-initdb.d
+
+  redis:
+    image: redis:3
+    ports:
+      - "11002:6379"

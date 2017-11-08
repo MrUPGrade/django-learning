@@ -1,0 +1,22 @@
+<nav class="navbar navbar-inverse">
+    <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="{% url 'basics:index' %}">MYSITE</a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li><a href="{% url 'basics:contact-all' %}">Contacts</a></li>
+                <li><a href="{% url 'basics:tags' %}">Tags</a></li>
+                <li><a href="{% url 'basics:vuetest' %}">Vue Test</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                {% if user.is_authenticated %}
+                    <li><a href="{% url 'basics:logout' %}">Logout</a></li>
+                {% else %}
+                    <li><a href="{% url 'basics:login' %}">Login</a></li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</nav>
