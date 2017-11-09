@@ -1,0 +1,8 @@
+[run]
+omit=tests/*,*venv*,*__init__.py
+branch = True
+source = mysite/basics
+
+[report]
+exclude_lines =
+    pass
