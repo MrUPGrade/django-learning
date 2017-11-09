@@ -1,7 +1,4 @@
 django
 djangorestframework
 django-debug-toolbar
-pytest
-pytest-django
-pytest-pythonpath
 psycopg2
