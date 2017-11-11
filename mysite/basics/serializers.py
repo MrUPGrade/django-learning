@@ -4,13 +4,10 @@ from rest_framework import serializers
 from .models import Contact, Tag
 
 
-
-
-
 class TagSerializer(serializers.ModelSerializer):
     class Meta:
         model = Tag
-        fields = ('id', 'name', )
+        fields = Tag.field_list(exclude=('contacts',))
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -31,5 +28,4 @@ class ContactSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Contact
-        fields = ('id', 'first_name', 'last_name', 'email', 'tags', 'phone', 'user')
-        depth = 0
+        fields = Contact.field_list()
