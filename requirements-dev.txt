@@ -1,4 +1,3 @@
 docker-compose
-pytest
-pytest-django
-pytest-pythonpath
+django-debug-toolbar
+httpie

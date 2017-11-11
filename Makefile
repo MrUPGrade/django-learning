@@ -24,17 +24,28 @@ clean: clean-pyc clean-test
 	$(RM) build/
 	$(RM) dist/
 
-pip-install:
+
+pip-install-app:
 	$(PIP) install --upgrade pip
 	$(PIP) install --upgrade setuptools
 	$(PIP) install --upgrade -r requirements.txt
+
+pip-install-dev:
 	$(PIP) install --upgrade -r requirements-dev.txt
+
+pip-install-test:
+	$(PIP) install --upgrade -r requirements-test.txt
+
+pip-install: pip-install-app pip-install-test pip-install-dev
 
 dj-migrate:
 	$(MPY) migrate
 
 dj-makemigrations:
 	$(MPY) makemigrations
+
+dj-shell:
+	$(MPY) shell
 
 sleep:
 	sleep 5
@@ -60,4 +71,4 @@ dc-logs:
 mys-initusers:
 	$(MPY) initusers
 
-env-reset: dc-down dc-up sleep dj-migrate mys-initusers
+env-reset: dc-down dc-up sleep dj-migrate #mys-initusers
