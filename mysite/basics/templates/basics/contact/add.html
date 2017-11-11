@@ -3,7 +3,8 @@
 {% block title %}Add contact{% endblock %}
 
 {% block content %}
-    <form class="form-horizontal" action="{% url 'basics:contact-add' %}" method="post">
+    <form class="form-horizontal" action="{% url 'basics:contact-add' %}"
+          method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form.as_p }}
         <input class="btn btn-default" type="submit" value="Submit"/>

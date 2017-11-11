@@ -26,7 +26,7 @@ class AddContactView(View, LoginRequiredMixin):
         return render(request, self.template, {'form': form})
 
     def post(self, request):
-        form = forms.ContactForm(request.POST)
+        form = forms.ContactForm(request.POST, request.FILES)
         if form.is_valid():
             contanct = form.save(commit=False)
             contanct.user = request.user

@@ -90,3 +90,7 @@ ENV/
 
 .idea/
 *.sqlite3
+
+# Django media folder (development)
+
+*/media/*

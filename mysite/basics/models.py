@@ -23,6 +23,7 @@ class Contact(models.Model, IntrospectionMixin):
     email = models.EmailField(max_length=50, blank=True, null=True)
     phone = models.CharField(max_length=20, blank=True, null=True)
 
-    tags = models.ManyToManyField(Tag, related_name='contacts', blank=True)
+    profile_pic = models.ImageField(upload_to='profile', blank=True, null=True)
 
+    tags = models.ManyToManyField(Tag, related_name='contacts', blank=True)
     user = models.ForeignKey(User, related_name='contacts')
