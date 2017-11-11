@@ -39,4 +39,4 @@ class AddContactView(View, LoginRequiredMixin):
 @login_required
 def all_contacts(request):
     contacts = models.Contact.objects.filter(user=request.user)
-    return render(request, 'basics/contact/all.html', {'contacts': contacts})
+    return render(request, 'basics/contact/list.html', {'contacts': contacts})

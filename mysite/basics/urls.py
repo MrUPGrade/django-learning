@@ -1,11 +1,10 @@
-from django.conf.urls import url, include
+from django.conf.urls import url
 
+import basics.views.auth as auth_views
 import basics.views.contact as contact_views
 import basics.views.other as other_views
 import basics.views.tags as tags_views
-import basics.views.auth as auth_views
 from .views import api as api_views
-from .views.rapi import router
 
 app_name = 'basics'
 
@@ -27,7 +26,4 @@ urlpatterns = [
 
     # API
     url(r'^api/hello', api_views.hello_world, name='api_hello'),
-
-    # url(r'^rapi/', include(router.urls, namespace='basics')),
-    # url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework'))
 ]
