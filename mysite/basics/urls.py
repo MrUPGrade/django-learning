@@ -5,6 +5,7 @@ import basics.views.contact as contact_views
 import basics.views.other as other_views
 import basics.views.tags as tags_views
 from .views import api as api_views
+from .views import tasks as tasks_views
 
 app_name = 'basics'
 
@@ -24,6 +25,7 @@ urlpatterns = [
     url(r'^auth/login/$', auth_views.MyLoginView.as_view(), name='login'),
     url(r'^auth/logout/$', auth_views.logout_view, name='logout'),
 
-    # API
+    # APIcelery_test
     url(r'^api/hello', api_views.hello_world, name='api_hello'),
+    url(r'^tasks/test', tasks_views.celery_test, name='celery_test'),
 ]

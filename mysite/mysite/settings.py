@@ -132,6 +132,15 @@ CACHES = {
     }
 }
 
+BROKER_URL = broker_url = 'redis://127.0.0.1:11002/2'
+CELERY_RESULT_BACKEND = 'redis://127.0.0.1:11002/3'
+
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_SERIALIZER = 'json'
+CELERY_ACCEPT_CONTENT = ['json']
+CELERY_TIMEZONE = 'UTC'
+CELERY_ENABLE_UTC = True
+
 SESSION_ENGINE = "django.contrib.sessions.backends.cache"
 
 REST_FRAMEWORK = {

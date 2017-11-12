@@ -1,0 +1,13 @@
+{% extends 'basics/_layout.html' %}
+
+{% block title %}Celery task tests{% endblock %}
+
+{% block content %}
+    <h2>Celery Tests</h2>
+    <p>Tag names fetched by celery task</p>
+    <ul>
+    {% for t in tags %}
+        <li>{{ t }}</li>
+    {% endfor %}
+    </ul>
+{% endblock %}
