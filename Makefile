@@ -77,4 +77,8 @@ mys-initusers:
 mys-populatedb:
 	$(MPY) populatedb
 
+perf-simple-test:
+	locust -f perftest/locustfile.py --host=http://localhost:8000 --no-web -c 20 -r 4 -t 2m
+
+
 env-reset: dc-down clean dj-clean-media dc-up sleep dj-migrate mys-populatedb

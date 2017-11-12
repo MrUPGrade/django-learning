@@ -1,5 +1,5 @@
-from django.contrib.auth.views import LoginView
 from django.contrib.auth import logout
+from django.contrib.auth.views import LoginView
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 
