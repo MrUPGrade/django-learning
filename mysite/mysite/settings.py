@@ -1,6 +1,15 @@
 import os
 from pathlib import Path
 
+
+DJL_DB_HOST=os.getenv('DJL_DB_HOST', '127.0.0.1')
+DJL_DB_PORT=os.getenv('DJL_DB_PORT', 11001)
+DJL_REDIS_HOST=os.getenv('DJL_REDIS_HOST', '127.0.0.1')
+DJL_REDIS_PORT=os.getenv('DJL_REDIS_PORT', 11002)
+
+
+
+
 BASE_DIR = (Path(__file__) / '..' / '..').resolve()
 SECRET_KEY = '2bfm-@qkf$b7fxuw&oozi5#a62z8&v8k(q@u!0-@hf%0d3%6od'
 
@@ -57,8 +66,8 @@ DATABASES = {
         'NAME': 'mysite',
         'USER': 'dbuser',
         'PASSWORD': 'dbuser',
-        'HOST': 'localhost',
-        'PORT': '11001',
+        'HOST': DJL_DB_HOST,
+        'PORT': str(DJL_DB_PORT),
     }
 }
 
@@ -104,7 +113,7 @@ LOGGING = {
         'file': {
             'level': 'DEBUG',
             'class': 'logging.FileHandler',
-            'filename': '/home/upgrade/debug.log',
+            'filename': '%s/django.log' % str((BASE_DIR / '..').resolve()),
         },
         'console': {
             'level': 'DEBUG',
@@ -124,7 +133,7 @@ LOGGING = {
 CACHES = {
     "default": {
         "BACKEND": "django_redis.cache.RedisCache",
-        "LOCATION": "redis://127.0.0.1:11002/1",
+        "LOCATION": "redis://%s:%s/1" % (DJL_REDIS_HOST, DJL_REDIS_PORT),
         "OPTIONS": {
             "CLIENT_CLASS": "django_redis.client.DefaultClient"
         },
@@ -132,8 +141,8 @@ CACHES = {
     }
 }
 
-BROKER_URL = broker_url = 'redis://127.0.0.1:11002/2'
-CELERY_RESULT_BACKEND = 'redis://127.0.0.1:11002/3'
+BROKER_URL = broker_url = 'redis://%s:%s/2' % (DJL_REDIS_HOST, DJL_REDIS_PORT)
+CELERY_RESULT_BACKEND = 'redis://%s:%s/3' % (DJL_REDIS_HOST, DJL_REDIS_PORT)
 
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'

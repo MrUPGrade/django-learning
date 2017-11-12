@@ -6,7 +6,7 @@ PIP=pip
 MPY=$(PYTHON) mysite/manage.py
 
 DC=docker-compose --no-ansi
-DOCKER=docker
+D=docker
 
 clean-pyc:
 	find . -name '*.pyc' -exec rm -fv {} +
@@ -16,13 +16,17 @@ clean-test:
 	$(RM) .cache
 	$(RM) .coverage
 
-clean: clean-pyc clean-test
-	$(RM) *.log
+clean-build:
 	$(RM) *.egg-info
 	$(RM) graph_output
 	$(RM) artifacts
 	$(RM) build/
 	$(RM) dist/
+
+clean-log:
+	$(RM) *.log
+
+clean: clean-pyc clean-test clean-build clean-log
 
 
 pip-install-app:
@@ -37,6 +41,10 @@ pip-install-test:
 	$(PIP) install --upgrade -r requirements-test.txt
 
 pip-install: pip-install-app pip-install-test pip-install-dev
+
+
+test:
+	pytest
 
 dj-migrate:
 	$(MPY) migrate
@@ -89,7 +97,28 @@ celery-run:
 celery-events:
 	celery events --workdir mysite/ -A mysite.celery
 
+DOCKERFILES_DIR=ops/docker
+DOCKER_REPO_TAG=mrupgrade
+BASE_IMG=$(DOCKER_REPO_TAG)/djl-base
+BASE_IMG_TAG=$(BASE_IMG):1
+
+SRC_ROOT=$(shell pwd)
+USER_ID=$(shell id -u)
+
+ci-build-image-base:
+	$(D) build -t $(BASE_IMG_TAG) -f $(DOCKERFILES_DIR)/base.Dockerfile .
+	$(D) tag $(BASE_IMG_TAG) $(BASE_IMG):latest
 
 
+DCP=$(DC) -p test -f ops/docker/test.docker-compose.yaml
+ci-run-tests:
+	$(DCP) up --no-start
+	$(DCP) start db
+	$(DCP) start cache
+	sleep 3
+	$(DCP) run tests
+
+ci-run-tests-clean:
+	$(DCP) down -v
 
 env-reset: dc-down clean dj-clean-media dc-up sleep dj-migrate mys-populatedb
