@@ -1,7 +1,7 @@
 import os
 from pathlib import Path
 
-BASE_DIR = (Path(__file__) / '..'/ '..').resolve()
+BASE_DIR = (Path(__file__) / '..' / '..').resolve()
 SECRET_KEY = '2bfm-@qkf$b7fxuw&oozi5#a62z8&v8k(q@u!0-@hf%0d3%6od'
 
 DEBUG = True
@@ -120,6 +120,19 @@ LOGGING = {
         },
     },
 }
+
+CACHES = {
+    "default": {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": "redis://127.0.0.1:11002/1",
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient"
+        },
+        "KEY_PREFIX": "mysite"
+    }
+}
+
+SESSION_ENGINE = "django.contrib.sessions.backends.cache"
 
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [

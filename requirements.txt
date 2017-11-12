@@ -3,3 +3,4 @@ djangorestframework
 psycopg2
 coreapi
 pillow
+django-redis
