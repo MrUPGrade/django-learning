@@ -81,4 +81,15 @@ perf-simple-test:
 	locust -f perftest/locustfile.py --host=http://localhost:8000 --no-web -c 20 -r 4 -t 2m
 
 
+CELERY_HOSTNAME=$(shell hostname)-$(shell echo $$PPID)
+celery-run:
+	echo $(HOSTNAME)
+	celery worker  --workdir mysite/ -A mysite.celery -E -l info -n worker@$(CELERY_HOSTNAME)
+
+celery-events:
+	celery events --workdir mysite/ -A mysite.celery
+
+
+
+
 env-reset: dc-down clean dj-clean-media dc-up sleep dj-migrate mys-populatedb
