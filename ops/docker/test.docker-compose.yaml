@@ -12,6 +12,11 @@ services:
       - DJL_DB_PORT=5432
       - DJL_REDIS_HOST=cache
       - DJL_REDIS_PORT=6379
+    depends_on:
+      - db
+      - cache
+    user: ${USER_ID}
+
 
   db:
     image: postgres:9.6

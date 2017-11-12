@@ -103,22 +103,28 @@ BASE_IMG=$(DOCKER_REPO_TAG)/djl-base
 BASE_IMG_TAG=$(BASE_IMG):1
 
 SRC_ROOT=$(shell pwd)
-USER_ID=$(shell id -u)
+export USER_ID=$(shell id -u)
 
 ci-build-image-base:
 	$(D) build -t $(BASE_IMG_TAG) -f $(DOCKERFILES_DIR)/base.Dockerfile .
 	$(D) tag $(BASE_IMG_TAG) $(BASE_IMG):latest
 
 
-DCP=$(DC) -p test -f ops/docker/test.docker-compose.yaml
-ci-run-tests:
+DJL_CI_ENV_NAME?=djltest
+DCP=$(DC) -p $(DJL_CI_ENV_NAME) -f ops/docker/test.docker-compose.yaml
+
+ci-env-prep:
 	$(DCP) up --no-start
 	$(DCP) start db
 	$(DCP) start cache
-	sleep 3
+
+ci-run-tests:
 	$(DCP) run tests
 
-ci-run-tests-clean:
+ci-env-clean:
 	$(DCP) down -v
 
-env-reset: dc-down clean dj-clean-media dc-up sleep dj-migrate mys-populatedb
+
+tg-ci-run: ci-env-prep sleep ci-run-tests ci-env-clean
+
+tg-env-reset: dc-down clean dj-clean-media dc-up sleep dj-migrate mys-populatedb
