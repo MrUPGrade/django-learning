@@ -84,7 +84,7 @@ perf-simple-test:
 CELERY_HOSTNAME=$(shell hostname)-$(shell echo $$PPID)
 celery-run:
 	echo $(HOSTNAME)
-	celery worker  --workdir mysite/ -A mysite.celery -E -l info -n worker@$(CELERY_HOSTNAME)
+	celery worker  --workdir mysite/ -A mysite.celery -E -l info -n worker@$(CELERY_HOSTNAME) -Q celery,slow
 
 celery-events:
 	celery events --workdir mysite/ -A mysite.celery
