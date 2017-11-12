@@ -47,6 +47,9 @@ dj-makemigrations:
 dj-shell:
 	$(MPY) shell
 
+dj-clean-media:
+	$(RM) mysite/media/
+
 sleep:
 	sleep 5
 
@@ -71,4 +74,7 @@ dc-logs:
 mys-initusers:
 	$(MPY) initusers
 
-env-reset: dc-down dc-up sleep dj-migrate #mys-initusers
+mys-populatedb:
+	$(MPY) populatedb
+
+env-reset: dc-down clean dj-clean-media dc-up sleep dj-migrate mys-populatedb

@@ -1,7 +1,7 @@
 import os
 from pathlib import Path
 
-BASE_DIR = Path(__file__) / '..'/ '..'
+BASE_DIR = (Path(__file__) / '..'/ '..').resolve()
 SECRET_KEY = '2bfm-@qkf$b7fxuw&oozi5#a62z8&v8k(q@u!0-@hf%0d3%6od'
 
 DEBUG = True
@@ -115,7 +115,7 @@ LOGGING = {
     'loggers': {
         'django': {
             'handlers': ['file', 'console'],
-            'level': 'DEBUG',
+            'level': 'INFO',
             'propagate': True,
         },
     },
