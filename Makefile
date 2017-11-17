@@ -85,6 +85,9 @@ mys-initusers:
 mys-populatedb:
 	$(MPY) populatedb
 
+mys-createdb:
+	$(MPY) pgdb create
+
 perf-simple-test:
 	locust -f perftest/locustfile.py --host=http://localhost:8000 --no-web -c 20 -r 4 -t 2m
 
@@ -127,4 +130,4 @@ ci-env-clean:
 
 tg-ci-run: ci-env-prep sleep ci-run-tests ci-env-clean
 
-tg-env-reset: dc-down clean dj-clean-media dc-up sleep dj-migrate mys-populatedb
+tg-env-reset: dc-down clean dj-clean-media dc-up sleep mys-createdb dj-migrate mys-populatedb

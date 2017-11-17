@@ -1,14 +1,10 @@
 import os
 from pathlib import Path
 
-
-DJL_DB_HOST=os.getenv('DJL_DB_HOST', '127.0.0.1')
-DJL_DB_PORT=os.getenv('DJL_DB_PORT', 11001)
-DJL_REDIS_HOST=os.getenv('DJL_REDIS_HOST', '127.0.0.1')
-DJL_REDIS_PORT=os.getenv('DJL_REDIS_PORT', 11002)
-
-
-
+DJL_DB_HOST = os.getenv('DJL_DB_HOST', '127.0.0.1')
+DJL_DB_PORT = os.getenv('DJL_DB_PORT', 11001)
+DJL_REDIS_HOST = os.getenv('DJL_REDIS_HOST', '127.0.0.1')
+DJL_REDIS_PORT = os.getenv('DJL_REDIS_PORT', 11002)
 
 BASE_DIR = (Path(__file__) / '..' / '..').resolve()
 SECRET_KEY = '2bfm-@qkf$b7fxuw&oozi5#a62z8&v8k(q@u!0-@hf%0d3%6od'
@@ -66,6 +62,14 @@ DATABASES = {
         'NAME': 'mysite2',
         'USER': 'dbuser',
         'PASSWORD': 'dbuser',
+        'HOST': DJL_DB_HOST,
+        'PORT': str(DJL_DB_PORT),
+    },
+    'adm': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'postgres',
+        'USER': 'postgres',
+        'PASSWORD': '',
         'HOST': DJL_DB_HOST,
         'PORT': str(DJL_DB_PORT),
     }
