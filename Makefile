@@ -93,12 +93,15 @@ perf-simple-test:
 
 
 CELERY_HOSTNAME=$(shell hostname)-$(shell echo $$PPID)
-celery-run:
+run-celery:
 	echo $(HOSTNAME)
 	celery worker  --workdir mysite/ -A mysite.celery -E -l info -n worker@$(CELERY_HOSTNAME) -Q celery,slow
 
-celery-events:
+run-celery-events:
 	celery events --workdir mysite/ -A mysite.celery
+
+run-app:
+	$(MPY) runserver --bind
 
 DOCKERFILES_DIR=ops/docker
 DOCKER_REPO_TAG=mrupgrade
